@@ -4,16 +4,12 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './styles.js';
 import PlaceDetails from '../PlaceDetails/PlaceDetails.js';
 
-const List = () => {
+const List = (places) => {
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('rating');
   const classes = useStyles();
-
-  const places =[
-    {name:'Best Places ',rating:10,price_level:1},
-    {name:'Cool Places ',rating:1,price_level:1},
-    {name:'HOT Places ',rating:1,price_level:1},
-  ]
+console.log(places,"places")
+ 
 
   return (
     <div className={classes.container}>
@@ -42,11 +38,11 @@ const List = () => {
             </Select>
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
-          {places?.map((place, i) => (
+          {/* {places?.map((place, i) => (
               <Grid key={i} item xs={12}>
                  <PlaceDetails place={place}/>
               </Grid>
-            ))}
+            ))} */}
           </Grid>
         </>
       )}

@@ -15,7 +15,7 @@ export default function App() {
   // As we are setting below so now init value is not required 
  // const [coords, setCoords] = useState({lat:0,lng:0});
  const [coords, setCoords] = useState({});
-  const [bounds, setBounds] = useState(null);
+  const [bounds, setBounds] = useState({});
 
   // How to get the use thing 
 
@@ -26,6 +26,7 @@ export default function App() {
       setCoords({ lat: latitude, lng: longitude });
     });
   }, []);
+
 
 
   // WHat is going on here ,,, 
@@ -47,7 +48,7 @@ export default function App() {
    <Header/>
    <Grid container spacing={3} style={{width:'100%'}}>
      <Grid item xs={12} md={4}>
-      <List/>
+      <List  places={places}/>
      </Grid>
      <Grid item xs={12} md={8}>
       <Map 
