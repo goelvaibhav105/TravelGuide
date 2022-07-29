@@ -7,9 +7,10 @@ import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './styles.js';
 
-const Map = ({coords,setCoords,setBounds,places}) => {
+const Map = ({coords,setCoords,setBounds,places,setChildClicked}) => {
   const isMobile = useMediaQuery('(min-width:600px)');
   // is Mobile will be true if width less than 600px
+
   const classes = useStyles();
  
   return (
@@ -25,6 +26,7 @@ const Map = ({coords,setCoords,setBounds,places}) => {
            setCoords({lat:e.center.lat,lng:e.center.lng});
            setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
+          onChildClick={(child) => setChildClicked(child)}
       
       >
      {places.length && places.map((place, i) => (

@@ -18,6 +18,10 @@ export default function App() {
   const [bounds, setBounds] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+
+// Click Map Card 
+  const [childClicked, setChildClicked] = useState(null);
+
   // How to get the use thing 
 
   // Fetch User Location by built in browser GeoLocation APi 
@@ -52,7 +56,7 @@ export default function App() {
    <Header/>
    <Grid container spacing={3} style={{width:'100%'}}>
      <Grid item xs={12} md={4}>
-      <List  isLoading={isLoading} places={places}/>
+      <List  isLoading={isLoading} places={places}    childClicked={childClicked}/>
      </Grid>
      <Grid item xs={12} md={8}>
       <Map 
@@ -60,6 +64,7 @@ export default function App() {
       setBounds={setBounds}
       coords={coords}
       places={places}
+      setChildClicked={setChildClicked}
       />
      </Grid>
    </Grid>

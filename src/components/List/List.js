@@ -4,10 +4,33 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './styles.js';
 import PlaceDetails from '../PlaceDetails/PlaceDetails.js';
 
-const List = ({places,isLoading}) => {
+const List = ({places,isLoading,childClicked}) => {
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('rating');
+ 
+
+
+  const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
+
+
+/// useRef is used to scroll to a specific Item
+
+/*
+1 everytime Places change then it will called 
+2 elRefs is having all the refrences 
+3 here we are creating a Array having all the places then 
+4 Then we map over that array using a index 
+5 Then if ref is not there then we are creating ref
+
+
+*/
+
+  useEffect(() => {
+    const refs =  Array(places.length).fill().map((_, i) => elRefs[i] || createRef())
+    setElRefs(refs)
+
+  }, [places]);
  
 
   return (
@@ -38,8 +61,8 @@ const List = ({places,isLoading}) => {
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
           {places && places.map((place, i) => (
-              <Grid key={i} item xs={12}>
-                 <PlaceDetails place={place}/>
+              <Grid ref={elRefs[i]} key={i}  item xs={12}>
+                 <PlaceDetails  selected={Number(childClicked) === i} refProp={elRefs[i]}  place={place}/>
               </Grid>
             ))}
           </Grid>
