@@ -7,7 +7,7 @@ import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './styles.js';
 
-const Map = ({coords,setCoords,setBounds}) => {
+const Map = ({coords,setCoords,setBounds,places}) => {
   const isMobile = useMediaQuery('(min-width:600px)');
   // is Mobile will be true if width less than 600px
   const classes = useStyles();
@@ -27,7 +27,7 @@ const Map = ({coords,setCoords,setBounds}) => {
         }}
       
       >
-        {/* {places.length && places.map((place, i) => (
+     {places.length && places.map((place, i) => (
           <div
             className={classes.markerContainer}
             lat={Number(place.latitude)}
@@ -48,11 +48,11 @@ const Map = ({coords,setCoords,setBounds}) => {
               )}
           </div>
         ))}
-        {weatherData?.list?.length && weatherData.list.map((data, i) => (
+        {/* {weatherData?.list?.length && weatherData.list.map((data, i) => (
           <div key={i} lat={data.coord.lat} lng={data.coord.lon}>
             <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} height="70px" />
           </div>
-        ))} */}
+        ))}  */}
       </GoogleMapReact>
     </div>
   );

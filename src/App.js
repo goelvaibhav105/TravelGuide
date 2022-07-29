@@ -15,7 +15,8 @@ export default function App() {
   // As we are setting below so now init value is not required 
  // const [coords, setCoords] = useState({lat:0,lng:0});
  const [coords, setCoords] = useState({});
-  const [bounds, setBounds] = useState({});
+  const [bounds, setBounds] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // How to get the use thing 
 
@@ -35,12 +36,15 @@ export default function App() {
 // Use google Chrome setting for this or simple scrool the map ok 
 
   useEffect(()=>{
+    if (bounds) {
+      setIsLoading(true);
     getPlacesData(bounds.sw,bounds.ne)
     .then((data)=>{
       console.log(data,"heyyy ")
       setPlaces(data)
+      setIsLoading(false)
     })
-  },[coords,bounds])
+  }},[coords,bounds])
 
   return (
    <>
@@ -48,13 +52,14 @@ export default function App() {
    <Header/>
    <Grid container spacing={3} style={{width:'100%'}}>
      <Grid item xs={12} md={4}>
-      <List  places={places}/>
+      <List  isLoading={isLoading} places={places}/>
      </Grid>
      <Grid item xs={12} md={8}>
       <Map 
       setCoords={setCoords}
       setBounds={setBounds}
       coords={coords}
+      places={places}
       />
      </Grid>
    </Grid>

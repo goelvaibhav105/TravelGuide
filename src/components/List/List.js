@@ -4,17 +4,16 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './styles.js';
 import PlaceDetails from '../PlaceDetails/PlaceDetails.js';
 
-const List = (places) => {
+const List = ({places,isLoading}) => {
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('rating');
   const classes = useStyles();
-console.log(places,"places")
  
 
   return (
     <div className={classes.container}>
       <Typography variant="h4">Food & Dining around you</Typography>
-      {false ? (
+      {isLoading ? (
         <div className={classes.loading}>
           <CircularProgress size="5rem" />
         </div>
@@ -38,11 +37,11 @@ console.log(places,"places")
             </Select>
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
-          {/* {places?.map((place, i) => (
+          {places && places.map((place, i) => (
               <Grid key={i} item xs={12}>
                  <PlaceDetails place={place}/>
               </Grid>
-            ))} */}
+            ))}
           </Grid>
         </>
       )}
