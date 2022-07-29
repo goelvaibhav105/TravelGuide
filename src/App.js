@@ -34,7 +34,7 @@ export default function App() {
 // Use google Chrome setting for this or simple scrool the map ok 
 
   useEffect(()=>{
-    getPlacesData()
+    getPlacesData(bounds.sw,bounds.ne)
     .then((data)=>{
       console.log(data,"heyyy ")
       setPlaces(data)
