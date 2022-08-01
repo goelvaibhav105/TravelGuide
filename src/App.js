@@ -10,7 +10,12 @@ import {getPlacesData } from './api'
 
 export default function App() {
   const [places, setPlaces] = useState([])
-  const [rating, setRating] = useState('');
+
+
+
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('rating');
+ 
 
   // As we are setting below so now init value is not required 
  // const [coords, setCoords] = useState({lat:0,lng:0});
@@ -42,14 +47,13 @@ export default function App() {
   useEffect(()=>{
     if (bounds) {
       setIsLoading(true);
-      console.log(getPlacesData,"getPlacesData")
-    getPlacesData(bounds.sw,bounds.ne)
+    getPlacesData(type,bounds.sw,bounds.ne)
     .then((data)=>{
       console.log(data,"heyyy ")
       setPlaces(data)
       setIsLoading(false)
     })
-  }},[coords,bounds])
+  }},[type,coords,bounds])
 
   return (
    <>
@@ -57,7 +61,7 @@ export default function App() {
    <Header/>
    <Grid container spacing={3} style={{width:'100%'}}>
      <Grid item xs={12} md={4}>
-      <List  isLoading={isLoading} places={places}    childClicked={childClicked}/>
+      <List  isLoading={isLoading} places={places}    childClicked={childClicked} type={type} rating={rating} setRating={setRating} setType={setType}/>
      </Grid>
      <Grid item xs={12} md={8}>
       <Map 
