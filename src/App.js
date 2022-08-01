@@ -42,6 +42,7 @@ export default function App() {
   useEffect(()=>{
     if (bounds) {
       setIsLoading(true);
+      console.log(getPlacesData,"getPlacesData")
     getPlacesData(bounds.sw,bounds.ne)
     .then((data)=>{
       console.log(data,"heyyy ")
