@@ -20,7 +20,7 @@ export default function App() {
   // As we are setting below so now init value is not required 
  // const [coords, setCoords] = useState({lat:0,lng:0});
  const [coords, setCoords] = useState({});
-  const [bounds, setBounds] = useState(null);
+  const [bounds, setBounds] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
 
@@ -65,16 +65,16 @@ export default function App() {
 // Use google Chrome setting for this or simple scrool the map ok 
 
   useEffect(()=>{
-    if (bounds) {
+    if (bounds.sw, bounds.ne) {
       setIsLoading(true);
     getPlacesData(type,bounds.sw,bounds.ne)
     .then((data)=>{  
-      setPlaces(data)
+      setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
       setFilteredPlaces([]);
       setRating('');
-      setIsLoading(false)
+      setIsLoading(false);
     })
-  }},[type,coords,bounds])
+  }},[type,bounds])
 
 
   const onLoad = (autoC) => setAutocomplete(autoC);
