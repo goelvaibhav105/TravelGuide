@@ -27,15 +27,31 @@ export default function App() {
 // Click Map Card 
   const [childClicked, setChildClicked] = useState(null);
 
+  // Filtered Places and change is going to happen when we change the rating
+
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
+
   // How to get the use thing 
 
   // Fetch User Location by built in browser GeoLocation APi 
+
+  
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
       setCoords({ lat: latitude, lng: longitude });
     });
   }, []);
+
+
+  // Rating Type 
+
+  useEffect(() => {
+    const filtered = places.filter((place) => Number(place.rating) > rating);
+
+    setFilteredPlaces(filtered);
+  }, [rating]);
+
 
 
 
@@ -48,9 +64,10 @@ export default function App() {
     if (bounds) {
       setIsLoading(true);
     getPlacesData(type,bounds.sw,bounds.ne)
-    .then((data)=>{
-      console.log(data,"heyyy ")
+    .then((data)=>{  
       setPlaces(data)
+      setFilteredPlaces([]);
+      setRating('');
       setIsLoading(false)
     })
   }},[type,coords,bounds])
@@ -61,14 +78,14 @@ export default function App() {
    <Header/>
    <Grid container spacing={3} style={{width:'100%'}}>
      <Grid item xs={12} md={4}>
-      <List  isLoading={isLoading} places={places}    childClicked={childClicked} type={type} rating={rating} setRating={setRating} setType={setType}/>
+      <List  isLoading={isLoading}   places={filteredPlaces.length ? filteredPlaces : places}    childClicked={childClicked} type={type} rating={rating} setRating={setRating} setType={setType}/>
      </Grid>
      <Grid item xs={12} md={8}>
       <Map 
       setCoords={setCoords}
       setBounds={setBounds}
       coords={coords}
-      places={places}
+        places={filteredPlaces.length ? filteredPlaces : places}
       setChildClicked={setChildClicked}
       />
      </Grid>
