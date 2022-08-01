@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/TravelGuide/static/js/main.bb867d5b.js",
+    "index.html": "/TravelGuide/index.html",
+    "main.bb867d5b.js.map": "/TravelGuide/static/js/main.bb867d5b.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.bb867d5b.js"
+  ]
+}
